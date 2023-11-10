@@ -1,3 +1,4 @@
 export interface TimePickerProps {
-    type: "work" | "rest"
+    type: "work" | "rest",
+    identifier: string
 }

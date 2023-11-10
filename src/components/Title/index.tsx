@@ -3,10 +3,21 @@
 import { useTime } from "../../contexts/Time"
 
 const Title = () => {
-    const { counting } = useTime()
+    const { status } = useTime()
+
+    const getStatus = () => {
+        switch (status) {
+            case "working":
+                return "Working"
+            case "resting":
+                return "Resting"
+            case "stopped":
+                return "Stopped"
+        }
+    }
 
     return (
-        <title>{counting ? "Working" : "Resting"}</title>
+        <title>{getStatus()}</title>
     )
 }
 

@@ -2,11 +2,14 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { TimeProvider } from '../contexts/Time'
+import { MusicProvider } from '@/contexts/Music'
 import Status from '../components/Status'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Title from '../components/Title'
+import Repetitions from '@/components/Repetitions'
 import clsx from 'clsx'
+import Favicon from '@/components/Favicon'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,13 +25,17 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <TimeProvider>
-        <Title />
-        <body className={clsx(inter.className, "flex flex-col min-h-screen")}>
-          <Status />
-          <Header />
-          {children}
-          <Footer />
-        </body>
+        <MusicProvider>
+          <Title />
+          <Favicon />
+          <body className={clsx(inter.className, "flex flex-col min-h-screen")}>
+            <Status />
+            <Repetitions />
+            <Header />
+            {children}
+            <Footer />
+          </body>
+        </MusicProvider>
       </TimeProvider>
     </html>
   )

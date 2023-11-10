@@ -10,8 +10,8 @@ const TimeBox = ({ children }: { children: ReactNode }) => (
     </div>
 )
 
-const TimePicker = ({ type }: TimePickerProps) => {
-    const { time, setTime, restTime, setRestTime } = useTime()
+const TimePicker = ({ identifier, type }: TimePickerProps) => {
+    const { time, setTime, setCounterTime, restTime, setRestTime } = useTime()
 
     const getInput = (id: string) => {
         const input = document.getElementById(id) as HTMLInputElement
@@ -24,13 +24,17 @@ const TimePicker = ({ type }: TimePickerProps) => {
             case "work":
                 setTime({
                     ...time,
-                    [id]: Number(value)
+                    [id.replace(`${identifier}-`, "")]: Number(value)
+                })
+                setCounterTime({
+                    ...time,
+                    [id.replace(`${identifier}-`, "")]: Number(value)
                 })
                 break;
             case "rest":
                 setRestTime({
                     ...restTime,
-                    [id]: Number(value)
+                    [id.replace(`${identifier}-`, "")]: Number(value)
                 })
                 break;
         }
@@ -41,10 +45,10 @@ const TimePicker = ({ type }: TimePickerProps) => {
             <TimeBox >
                 <label htmlFor="hours">Hours</label>
                 <input
-                    id="hours"
+                    id={`${identifier}-hours`}
                     name="hours"
                     type="number"
-                    onChange={() => getInput("hours")}
+                    onChange={() => getInput(`${identifier}-hours`)}
                     min={0}
                     placeholder="00"
                     maxLength={2}
@@ -53,10 +57,10 @@ const TimePicker = ({ type }: TimePickerProps) => {
             <TimeBox>
                 <label htmlFor="minutes">Minutes</label>
                 <input
-                    onKeyUp={() => getInput("minutes")}
-                    onClick={() => getInput("minutes")}
-                    onChange={() => getInput("minutes")}
-                    id="minutes"
+                    onKeyUp={() => getInput(`${identifier}-minutes`)}
+                    onClick={() => getInput(`${identifier}-minutes`)}
+                    onChange={() => getInput(`${identifier}-minutes`)}
+                    id={`${identifier}-minutes`}
                     name="minutes"
                     type="number"
                     min={0}
@@ -68,10 +72,10 @@ const TimePicker = ({ type }: TimePickerProps) => {
             <TimeBox>
                 <label htmlFor="seconds">Seconds</label>
                 <input
-                    onKeyUp={() => getInput("seconds")}
-                    onClick={() => getInput("seconds")}
-                    onChange={() => getInput("seconds")}
-                    id="seconds"
+                    onKeyUp={() => getInput(`${identifier}-seconds`)}
+                    onClick={() => getInput(`${identifier}-seconds`)}
+                    onChange={() => getInput(`${identifier}-seconds`)}
+                    id={`${identifier}-seconds`}
                     name="seconds"
                     type="number"
                     min={0}
