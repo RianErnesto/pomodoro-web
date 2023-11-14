@@ -15,7 +15,6 @@ export default function Home() {
 
   return (
     <main className={clsx("flex-1 flex w-full items-center gap-10 px-8")}>
-      <Alarm />
       <AnimatePresence>
         {
           status === "stopped" &&

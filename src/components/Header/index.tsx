@@ -4,7 +4,7 @@ import Suggestion from "../Suggestion"
 import { useTime } from "@/contexts/Time"
 import { motion, AnimatePresence } from "framer-motion"
 import MusicStyleSelect from "../MusicStyleSelect"
-import ChangeMusic from "../ChangeMusic"
+import Alarm from "../Alarm"
 
 const Header = () => {
     const { status } = useTime()
@@ -21,6 +21,10 @@ const Header = () => {
                     </motion.div>
                     <MusicStyleSelect />
                 </header>
+            }
+            {
+                status !== "stopped" &&
+                <Alarm />
             }
         </AnimatePresence>
     )

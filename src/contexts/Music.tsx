@@ -33,6 +33,7 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
     const playMusic = () => {
         // @ts-ignore
         player?.playVideo()
+        player.loadVideoByUrl(music?.embedUrl, 0, "small")
         setIsPaused(false)
     }
 
@@ -57,7 +58,7 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
         if (currentMusicIndex === 0)
             return
         if (currentMusicIndex !== undefined)
-            setMusic(previous => 
+            setMusic(previous =>
                 musics.find(music => music.name === musicStyle)?.musics[currentMusicIndex - 1] || musics[0].musics[0]
             )
         playMusic()
